@@ -12,8 +12,8 @@ module.exports = function (grunt) {
       dashboard: {
         files: [
           // includes files within path
-          { expand: true, cwd: '', src: ['Dockerfile'], dest: 'dist/', filter: 'isFile' },
-          { expand: true, cwd: '', src: ['app.js'], dest: 'dist/', filter: 'isFile' },
+          { expand: true, src: ['Dockerfile'], dest: 'dist', filter: 'isFile' },
+          { expand: true, src: ['app.js'], dest: 'dist', filter: 'isFile' },
 
         ],
       }
