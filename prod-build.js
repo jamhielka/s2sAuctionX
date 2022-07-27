@@ -15,7 +15,7 @@ module.exports = function (grunt) {
           { expand: true, src: ['Dockerfile'], dest: 'dist', filter: 'isFile' },
           { expand: true, src: ['app.js'], dest: 'dist', filter: 'isFile' },
           { expand: true, src: ['package-lock.json'], dest: 'dist', filter: 'isFile' },
-          { expand: true, src: ['package.js'], dest: 'dist', filter: 'isFile' },
+          { expand: true, src: ['package.json'], dest: 'dist', filter: 'isFile' },
 
         ],
       }
