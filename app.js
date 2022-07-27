@@ -25,7 +25,7 @@ if (cluster.isMaster) {
     );
   });
 
-  const path = __dirname + "/dist";
+  const path = __dirname;
   app.use(express.static(path));
 
   app.get(/.*/, (req, res) => res.sendFile(path + "/index.html"));
