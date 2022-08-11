@@ -194,14 +194,14 @@ export default {
 
   methods: {
     async getSummaryReport() {
-      await this.$api
-        .post("WOW_RPT", { uRole: this.getPartner })
-        .then((response) => {
-          this.summaryReport = response.data;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      // await this.$api
+      //   .post("WOW_RPT", { uRole: this.getPartner })
+      //   .then((response) => {
+      //     this.summaryReport = response.data;
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //   });
     },
   },
 
