@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+//import { mapState } from "vuex";
 
 export default {
   name: "Sidebar",
@@ -87,10 +87,18 @@ export default {
   }),
   computed: {
     // ...mapState(["SidebarColor", "SidebarBg"]),
-    ...mapState({
-      SidebarColor: (state) => state.SidebarModule.SidebarColor,
-      SidebarBg: (state) => state.SidebarModule.SidebarBg,
-    }),
+    // ...mapState({
+    //   SidebarColor: (state) => state.SidebarModule.SidebarColor,
+    //   SidebarBg: (state) => state.SidebarModule.SidebarBg,
+    // }),
+     SidebarColor() {
+      return this.$store.getters.getSidebar.SidebarColor;
+    },
+
+    SidebarBg() {
+      return this.$store.getters.getSidebar.SidebarBg;
+    },
+
       showItemState () {
       return this.$store.getters.getUsername;
       },
