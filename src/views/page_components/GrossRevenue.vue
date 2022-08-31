@@ -54,11 +54,11 @@ export default {
 
         tooltip: {
           y: {
-            formatter: function(value){
-            return value.toLocaleString();
-            }
-          }
-        }
+            formatter: function(value) {
+              return value.toLocaleString();
+            },
+          },
+        },
       },
 
       series: [

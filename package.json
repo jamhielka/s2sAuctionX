@@ -20,6 +20,7 @@
     "v-calendar": "^2.4.0",
     "vee-validate": "^2.1.4",
     "vue": "^2.6.12",
+    "vue-apexcharts": "^1.6.2",
     "vue-echarts": "^6.0.2",
     "vue-i18n": "^8.22.0",
     "vue-router": "^3.4.6",

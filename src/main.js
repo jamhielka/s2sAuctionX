@@ -9,6 +9,7 @@ import DatetimePicker from 'vuetify-datetime-picker'
 import ECharts from 'vue-echarts'
 import { use } from 'echarts/core'
 // import ECharts modules manually to reduce bundle size
+import VueApexCharts from "vue-apexcharts";
 import {
   CanvasRenderer
 } from 'echarts/renderers'
@@ -26,6 +27,8 @@ use([
   GridComponent,
   TooltipComponent
 ]);
+Vue.use(VueApexCharts);
+Vue.component("apexchart", VueApexCharts);
 
 // register globally (or you can do it locally)
 Vue.component('v-chart', ECharts)

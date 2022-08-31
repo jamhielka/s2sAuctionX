@@ -19,10 +19,9 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>{{showItemState}}</v-list-item-title>
-      
+          <v-list-item-title>{{ showItemState }}</v-list-item-title>
         </v-list-item-content>
-      </v-list-item> 
+      </v-list-item>
       <!---USer Area -->
       <!---Sidebar Items -->
       <v-list-item
@@ -76,7 +75,6 @@ export default {
         icon: "mdi-folder-account",
         to: "/registration",
       },
-      
 
       {
         title: "Winners",
@@ -91,7 +89,8 @@ export default {
     //   SidebarColor: (state) => state.SidebarModule.SidebarColor,
     //   SidebarBg: (state) => state.SidebarModule.SidebarBg,
     // }),
-     SidebarColor() {
+
+    SidebarColor() {
       return this.$store.getters.getSidebar.SidebarColor;
     },
 
@@ -99,18 +98,19 @@ export default {
       return this.$store.getters.getSidebar.SidebarBg;
     },
 
-      showItemState () {
-      return this.$store.getters.getUsername;
-      },
     Sidebar_drawer: {
       get() {
-        return this.$store.state.SidebarModule.Sidebar_drawer;
+        return this.$store.getters.getSidebar.Sidebar_drawer;
       },
       set(val) {
         this.$store.commit("SET_SIDEBAR_DRAWER", val);
       },
     },
-    
+
+    showItemState() {
+      return this.$store.getters.getUsername;
+    },
+
   },
   watch: {
     "$vuetify.breakpoint.smAndDown"(val) {

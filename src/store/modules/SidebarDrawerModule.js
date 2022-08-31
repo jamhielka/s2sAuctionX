@@ -1,23 +1,27 @@
 export default {
-    state: {
-      Sidebar_drawer: null,
-      Customizer_drawer: false,
-      SidebarColor: 'white',
-      SidebarBg: ''
+  state: {
+    Sidebar_drawer: null,
+    Customizer_drawer: false,
+    SidebarColor: "white",
+    SidebarBg: "",
+  },
+  mutations: {
+    SET_SIDEBAR_DRAWER(state, payload) {
+      state.Sidebar_drawer = payload;
     },
-    mutations: {
-      SET_SIDEBAR_DRAWER(state, payload) {
-        state.Sidebar_drawer = payload
-      },
-      SET_CUSTOMIZER_DRAWER(state, payload) {
-        state.Customizer_drawer = payload
-      },
-      SET_SIDEBAR_COLOR(state, payload) {
-        state.SidebarColor = payload
-      },
+    SET_CUSTOMIZER_DRAWER(state, payload) {
+      state.Customizer_drawer = payload;
     },
-    actions: {},
-    getters: {
-      getSidebar: state => state
+    SET_SIDEBAR_COLOR(state, payload) {
+      state.SidebarColor = payload;
     },
-  }
+  },
+  actions: {
+    ADD_SIDEBAR_DRAWER: (context, payload) => {
+      context.commit("SET_SIDEBAR_DRAWER", payload);
+    },
+  },
+  getters: {
+    getSidebar: (state) => state,
+  },
+};
