@@ -8,6 +8,9 @@ import { API } from "../http-common";
 import DatetimePicker from 'vuetify-datetime-picker'
 import ECharts from 'vue-echarts'
 import { use } from 'echarts/core'
+import VueSweetalert2 from "vue-sweetalert2";
+// If you don't need the styles, do not connect
+import "sweetalert2/dist/sweetalert2.min.css";
 // import ECharts modules manually to reduce bundle size
 import VueApexCharts from "vue-apexcharts";
 import {
@@ -29,6 +32,7 @@ use([
 ]);
 Vue.use(VueApexCharts);
 Vue.component("apexchart", VueApexCharts);
+Vue.use(VueSweetalert2);
 
 // register globally (or you can do it locally)
 Vue.component('v-chart', ECharts)

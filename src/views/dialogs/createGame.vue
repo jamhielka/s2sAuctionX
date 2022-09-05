@@ -27,7 +27,6 @@
                       truncate-length="15"
                       label="Photo"
                       v-model="form.photo"
-
                     ></v-file-input>
                   </v-col>
                   <v-col cols="12" class="mt-0 pt-0">
@@ -46,7 +45,7 @@
                   </v-col>
                   <v-col cols="12" class="mt-0 pt-0">
                     <v-select
-                     v-model="form.type"
+                      v-model="form.type"
                       :items="['STATIC_BID', 'BLIND_BID', 'CLASSIC_BID']"
                       label="Type*"
                       @change="cascade"
@@ -55,28 +54,39 @@
                   </v-col>
                   <v-col cols="12" class="mt-0 pt-0">
                     <v-text-field
-                      label="Bid Amount"
+                      label="Bid Amount*"
                       v-model="form.bidAmount"
+                      required
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" class="mt-0 pt-0">
                     <v-text-field
-                      label="Countdown"
+                      label="Countdown*"
                       v-model="form.countdown"
                       v-if="showName"
+                      required
                     ></v-text-field>
                   </v-col>
 
                   <v-col cols="12" class="mt-0 pt-0">
                     <v-text-field
-                      label="First Warning"
+                      label="First Warning*"
                       v-model="form.firstWarning"
+                      required
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" class="mt-0 pt-0">
                     <v-text-field
-                      label="Second Warning"
+                      label="Second Warning*"
                       v-model="form.secondWarning"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" class="mt-0 pt-0">
+                    <v-text-field
+                      label="Third Warning"
+                      v-model="form.thirdWarning"
+                      v-if="thirdWarningShow"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" class="mt-0 pt-0">
@@ -131,7 +141,7 @@
                   </v-col>
                 </v-row>
               </v-container>
-              <small>*indicates required field</small>
+              <!-- <small>*indicates required field</small> -->
             </v-card-text>
             <v-card-actions class="pb-5">
               <v-spacer></v-spacer>
@@ -164,7 +174,7 @@ export default {
   data() {
     return {
       //   this.$emit("obj", true);
-      
+
       textFieldProps: {
         prependIcon: "mdi-calendar-month-outline",
         rules: [(value) => !!value || "Required."],
@@ -178,7 +188,7 @@ export default {
       menu1: false,
       menu2: false,
       showName: true,
-
+      thirdWarningShow: true,
       loadingBtn: false,
       rules: {
         required: [(value) => !!value || "Required."],
@@ -213,6 +223,12 @@ export default {
       } else {
         this.showName = true;
       }
+
+      if (e != "CLASSIC_BID") {
+        this.thirdWarningShow = false;
+      } else {
+        this.thirdWarningShow = true;
+      }
     },
 
     async onSubmit() {
@@ -224,9 +240,8 @@ export default {
       let data = this.form;
       data.startDate = moment().valueOf(data.startDate);
 
-
       data.endDate = moment().valueOf(data.endDate);
-       data.registrationDate = moment().valueOf(data.registrationDate);
+      data.registrationDate = moment().valueOf(data.registrationDate);
       const formData = new FormData();
 
       formData.append("merchantId", this.$route.query.ID);
@@ -240,34 +255,55 @@ export default {
       formData.append("countdown", data.countdown);
       formData.append("firstWarning", data.firstWarning);
       formData.append("secondWarning", data.secondWarning);
+      formData.append("thirddWarning", data.thirdWarning);
       formData.append("type", data.type);
       formData.append("photo", data.photo);
       for (var value of formData.values()) {
-   console.log(value);
-}
+        console.log(value);
+      }
       // setTimeout(() => {
       //   this.loadingBtn = false;
       //   this.$refs.form.reset()
       //   this.dialog = false;
       //   this.$emit("obj", true);
       // }, 3000);
-       //var TToken = localStorage.getItem("token");
-        
-            console.log(this.$route.query.ID);
-            //console.log(TToken);
- 
+      //var TToken = localStorage.getItem("token");
+
+      console.log(this.$route.query.ID);
+      //console.log(TToken);
+
       await this.$api
         .post("events", formData)
         .then((response) => {
-          console.log(response);
-        this.$emit("obj", true);
+     
+          let res = response.data;
+               console.log("MALI"+ res.status);
+          this.$emit("obj", true);
           this.loadingBtn = false;
-        this.$refs.form.reset();
+          this.$refs.form.reset();
           this.dialog = false;
-          alert("Events is successfully created");
+          if (res.status) {
+               this.$swal(
+                "Success!",
+                "Event has been created",
+                "success"
+              );
+         
+          } else {
+                 this.$swal(
+                "Oops!",
+                res.message,
+                "error"
+              );
+           
+          }
         })
         .catch((e) => {
-          console.log(e);
+         
+            this.$swal(
+                "Oops!",
+                e.response.data.message,
+                "error");
           this.loadingBtn = false;
         });
 
